@@ -8,7 +8,8 @@
 'use strict';
 
 var core = require('crypto-js/core');
-var md5 = require('crypto-js/md5');
+var base85 = require('base85');
+var bcryptjs = require('bcryptjs');
 
 var defaults = {
   length: 8,
@@ -22,7 +23,7 @@ var ccTLDList = ccTLDs.split('|');
 var ccTLDListLength = ccTLDList.length;
 
 var generatePassword = function (hashInput, length, passwordCase) {
-  var password = md5(hashInput).toString().substring(0, length);
+  var password = base85.encode(hashInput).toString().substring(0, length);
   return changeCase(password, passwordCase);
 };
 
